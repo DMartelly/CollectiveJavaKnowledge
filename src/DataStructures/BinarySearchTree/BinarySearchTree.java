@@ -2,110 +2,23 @@ package DataStructures.BinarySearchTree;
 
 /**
  * A Binary Search Tree that can hold multiple Nodes
- * (Should the methods to change the BST be in the BinarySearchTree class,
- * or the Node class?)
  *
  * @author Dominick Martelly
  */
 public class BinarySearchTree {
 
     /**
-     * The root Node of the Binary Search Tree
-     */
-    Node root;
-
-    /**
-     * Creates an empty BST
-     */
-    public BinarySearchTree() {
-        root = null;
-    }
-
-    /**
-     * Inserts a new node containing x into the tree
-     *
-     * @param x - an integer value
-     */
-    public void insert(int x) {
-        Node newNode = new Node(x);
-
-        if (root == null)
-            root = newNode;
-        else
-            root.add(x);
-    }
-
-    /**
-     * Removes a Node from a BST
-     *
-     * @param x if the Node contains this element, the Node will be
-     *          removed
-     * @return true if removed
-     */
-    public boolean remove(int x) {
-        if (root == null)
-            return false;
-        else if (root.getData() == x) {
-            Node newRoot = new Node(Integer.MAX_VALUE);
-            newRoot.left = root;
-            boolean result = newRoot.delete(x, null);
-            root = newRoot.left;
-            return result;
-        } else
-            return root.delete(x, null);
-    }
-
-    /**
-     * Gets the right most element in the BST
-     *
-     * @return the largest integer in the BST
-     */
-    public int getLargest() {
-        return root.getLargestChild().getData();
-    }
-
-    /**
-     * Gets the left most element in the BST
-     *
-     * @return the smallest integer in the BST
-     */
-    public int getSmallest() {
-        return root.getSmallestChild().getData();
-    }
-
-    /**
-     * Searches if there is a node containing x within the BST
-     *
-     * @param x an integer value
-     * @return true if the value is found
-     */
-    boolean binarySearch(int x) {
-        if (root == null)
-            return false;
-        else
-            return root.search(x);
-    }
-
-    @Override
-    public String toString() {
-        return root.toString();
-    }
-
-    /**
      * A Binary Search Tree's node. Holds a value, and two children nodes
      *
      * @author Dominick Martelly
      */
-
     private class Node {
 
         int value;
-
         /**
          * The node's left child. Should have a lower value than the node
          */
         Node left;
-
         /**
          * The node's right child. Should have a greater value than the node
          */
@@ -125,38 +38,35 @@ public class BinarySearchTree {
          *
          * @param x An integer value
          */
-        void add(int x) {
-            if (x <= this.value)
-                if (this.left == null) {
-                    Node newNode = new Node(x);
-                    this.left = newNode;
-                } else
-                    this.left.add(x);
-            else if (x > this.value)
-                if (this.right == null) {
-                    Node newNode = new Node(x);
-                    this.right = newNode;
-                } else
-                    this.right.add(x);
+        Node add(Node root, int x) {
+            if (root == null) {
+                return new Node(x);
+            }
+            if (x < this.value) {
+                root.left = add(root.left, x);
+            } else {
+                root.right = add(root.right, x);
+            }
+            return root;
         }
 
-        /**
-         * @param x An integer value
-         * @return The node containing x
-         */
-        private Node find(int x) {
-            if (x == this.value)
-                return this;
-            if (this.isLeaf())
-                return null;
-
-            if (x < this.value && this.left != null)
-                return this.left.find(x);
-            else if (x > this.value && this.right != null)
-                return this.right.find(x);
-            else
-                return null;
-        }
+//        /**
+//         * @param x An integer value
+//         * @return The node containing x
+//         */
+//        private Node find(int x) {
+//            if (x == this.value)
+//                return this;
+//            if (this.isLeaf())
+//                return null;
+//
+//            if (x < this.value && this.left != null)
+//                return this.left.find(x);
+//            else if (x > this.value && this.right != null)
+//                return this.right.find(x);
+//            else
+//                return null;
+//        }
 
         /**
          * Removes a Node from a tree
@@ -277,5 +187,86 @@ public class BinarySearchTree {
 
             return listofNodes;
         }
+    }
+
+    /**
+     * The root Node of the Binary Search Tree
+     */
+    private Node root;
+
+    /**
+     * Creates an empty BST
+     */
+    BinarySearchTree() {
+        root = null;
+    }
+
+    /**
+     * Inserts a new node containing x into the tree
+     *
+     * @param x - an integer value
+     */
+    void insert(int x) {
+        Node newNode = new Node(x);
+        if (root == null)
+            root = newNode;
+        else
+            root.add(root, x);
+    }
+
+    /**
+     * Removes a Node from a BST
+     *
+     * @param x if the Node contains this element, the Node will be
+     *          removed
+     * @return true if removed
+     */
+    public boolean remove(int x) {
+        if (root == null)
+            return false;
+        else if (root.getData() == x) {
+            Node newRoot = new Node(Integer.MAX_VALUE);
+            newRoot.left = root;
+            boolean result = newRoot.delete(x, null);
+            root = newRoot.left;
+            return result;
+        } else
+            return root.delete(x, null);
+    }
+
+    /**
+     * Gets the right most element in the BST
+     *
+     * @return the largest integer in the BST
+     */
+    public int getLargest() {
+        return root.getLargestChild().getData();
+    }
+
+    /**
+     * Gets the left most element in the BST
+     *
+     * @return the smallest integer in the BST
+     */
+    public int getSmallest() {
+        return root.getSmallestChild().getData();
+    }
+
+    /**
+     * Searches if there is a node containing x within the BST
+     *
+     * @param x an integer value
+     * @return true if the value is found
+     */
+    boolean binarySearch(int x) {
+        if (root == null)
+            return false;
+        else
+            return root.search(x);
+    }
+
+    @Override
+    public String toString() {
+        return root.toString();
     }
 }
