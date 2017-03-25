@@ -50,59 +50,35 @@ public class BinarySearchTree {
             return root;
         }
 
-//        /**
-//         * @param x An integer value
-//         * @return The node containing x
-//         */
-//        private Node find(int x) {
-//            if (x == this.value)
-//                return this;
-//            if (this.isLeaf())
-//                return null;
-//
-//            if (x < this.value && this.left != null)
-//                return this.left.find(x);
-//            else if (x > this.value && this.right != null)
-//                return this.right.find(x);
-//            else
-//                return null;
-//        }
+        /**
+         * @param x An integer value
+         * @return The node containing x
+         */
+        private Node find(Node root, int x) {
+            if (root == null)
+                return null;
+            if (root.value == x)
+                return this;
+            if (x < this.value)
+                return find(root.left, x);
+            else
+                return find(root.right, x);
+        }
 
         /**
          * Removes a Node from a tree
          *
-         * @param x          An integer value
-         * @param parentNode The parent node
+         * @param root the tree to use
+         * @param x    An integer value
          * @return True if the Node was found and deleted
          */
-        boolean delete(int x, Node parentNode) {
-            if (this.value == x) {
-                if (this.isFull()) {
-                    this.value = this.right.getSmallestChild().value;
-                    this.right.delete(this.value, this);
-                } else if (this == parentNode.left) {
-                    if (this.left == null)
-                        parentNode.left = this.left;
-                    else
-                        parentNode.right = this.right;
-                } else if (this == parentNode.right) {
-                    if (this.right == null)
-                        parentNode.right = this.left;
-                    else
-                        parentNode.right = this.right;
-                }
-            } else if (x < this.getData()) {
-                if (this.left == null)
-                    return false;
-                else
-                    return this.left.delete(x, this);
-            } else if (x > this.getData()) {
-                if (this.right == null)
-                    return false;
-                else
-                    return this.right.delete(x, this);
+        boolean delete(Node root, int x) {
+            Node toDelete = find(root, x);
+            if (toDelete == null) {
+                return false;
             }
-            return true;
+            //TODO: finish this function
+            return false;
         }
 
         /**
@@ -227,11 +203,11 @@ public class BinarySearchTree {
         else if (root.getData() == x) {
             Node newRoot = new Node(Integer.MAX_VALUE);
             newRoot.left = root;
-            boolean result = newRoot.delete(x, null);
+            boolean result = newRoot.delete(newRoot, x);
             root = newRoot.left;
             return result;
         } else
-            return root.delete(x, null);
+            return root.delete(root, x);
     }
 
     /**
