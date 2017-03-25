@@ -21,7 +21,8 @@ hs_err_pid*
 
 ## Compiled java classes:
 *.class
-/out
+out/
+bin/
 
 ## Plugin-specific files:
 
