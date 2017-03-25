@@ -1,4 +1,4 @@
-package other;
+package Other;
 
 import java.util.Scanner;
 import java.util.Stack;
