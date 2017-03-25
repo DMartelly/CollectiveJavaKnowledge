@@ -9,10 +9,10 @@ import java.util.List;
  * @author Dominick Martelly
  */
 public class MyHashTable {
-    static Integer[] removeDuplicates(int[] input, int maxVal){
+    static Integer[] removeDuplicates(int[] input, int maxVal) {
         List<Integer> new_a = new ArrayList<>();
         int[] myTable = new int[maxVal];
-        for (int i : input){
+        for (int i : input) {
             myTable[i]++;
         }
         for (int i1 = 0; i1 < myTable.length; i1++) {
