@@ -20,7 +20,6 @@ hs_err_pid*
 *.iws
 
 ## Compiled java classes:
-*.class
 out/
 bin/
 
