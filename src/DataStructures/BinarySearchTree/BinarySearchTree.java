@@ -42,7 +42,7 @@ public class BinarySearchTree {
             if (root == null) {
                 return new Node(x);
             }
-            if (x < this.value) {
+            if (x < root.value) {
                 root.left = add(root.left, x);
             } else {
                 root.right = add(root.right, x);
@@ -112,15 +112,6 @@ public class BinarySearchTree {
         }
 
         /**
-         * Checks if the Node has two children Nodes
-         *
-         * @return True if Node is full
-         */
-        boolean isFull() {
-            return (this.left != null && this.right != null);
-        }
-
-        /**
          * @return The int in the node
          */
         int getData() {
@@ -183,9 +174,8 @@ public class BinarySearchTree {
      * @param x - an integer value
      */
     void insert(int x) {
-        Node newNode = new Node(x);
         if (root == null)
-            root = newNode;
+            root = new Node(x);
         else
             root.add(root, x);
     }
@@ -197,7 +187,7 @@ public class BinarySearchTree {
      *          removed
      * @return true if removed
      */
-    public boolean remove(int x) {
+    boolean remove(int x) {
         if (root == null)
             return false;
         else if (root.getData() == x) {
@@ -215,7 +205,7 @@ public class BinarySearchTree {
      *
      * @return the largest integer in the BST
      */
-    public int getLargest() {
+    int getLargest() {
         return root.getLargestChild().getData();
     }
 
@@ -224,7 +214,7 @@ public class BinarySearchTree {
      *
      * @return the smallest integer in the BST
      */
-    public int getSmallest() {
+    int getSmallest() {
         return root.getSmallestChild().getData();
     }
 
@@ -243,6 +233,9 @@ public class BinarySearchTree {
 
     @Override
     public String toString() {
+        if (root == null) {
+            return "";
+        }
         return root.toString();
     }
 }
