@@ -23,8 +23,9 @@ hs_err_pid*
 out/
 bin/
 
-## Plugin-specific files:
-
+## Eclipse
+.project
+.classpath
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
