@@ -58,8 +58,8 @@ public class BinarySearchTree {
             if (root == null)
                 return null;
             if (root.value == x)
-                return this;
-            if (x < this.value)
+                return root;
+            if (x < root.value)
                 return find(root.left, x);
             else
                 return find(root.right, x);
@@ -77,11 +77,20 @@ public class BinarySearchTree {
             if (toDelete == null) {
                 return false;
             }
-            //TODO: finish this function
-            return false;
+            root = recDelete(toDelete);
+            return true;
         }
 
-        /**
+        private Node recDelete(Node toDelete) {
+			if (toDelete.right == null){
+				return null;
+			}
+			toDelete.value = toDelete.right.getData();
+			toDelete.right = recDelete(toDelete.right);
+			return toDelete;
+		}
+
+		/**
          * Searches though the tree of the Node for a Node containing the
          * current value
          *
@@ -190,13 +199,7 @@ public class BinarySearchTree {
     boolean remove(int x) {
         if (root == null)
             return false;
-        else if (root.getData() == x) {
-            Node newRoot = new Node(Integer.MAX_VALUE);
-            newRoot.left = root;
-            boolean result = newRoot.delete(newRoot, x);
-            root = newRoot.left;
-            return result;
-        } else
+        else
             return root.delete(root, x);
     }
 
