@@ -77,13 +77,13 @@ public class BinarySearchTree {
             if (toDelete == null) {
                 return false;
             }
-            root = recDelete(toDelete);
+            toDelete = recDelete(toDelete);
             return true;
         }
 
         private Node recDelete(Node toDelete) {
 			if (toDelete.right == null){
-				return null;
+				return toDelete.left;
 			}
 			toDelete.value = toDelete.right.getData();
 			toDelete.right = recDelete(toDelete.right);
