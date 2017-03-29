@@ -47,6 +47,17 @@ public class BinarySearchTreeTest {
         Assert.assertEquals("Test 3 failed", Integer.MIN_VALUE + " -99 4 "
                 + Integer.MAX_VALUE + " ", testTree.toString());
     }
+    
+    @Test
+    public void test4_delete() throws Exception {
+        testTree.insert(Integer.MIN_VALUE);
+        testTree.insert(Integer.MAX_VALUE);
+        testTree.insert(4);
+        testTree.insert(-99);
+        testTree.remove(4);
+        Assert.assertEquals("Test 3 failed", Integer.MIN_VALUE + " -99 "
+                + Integer.MAX_VALUE + " ", testTree.toString());
+    }
 
 
 }
