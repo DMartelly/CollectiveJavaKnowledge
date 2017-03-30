@@ -59,5 +59,12 @@ public class BinarySearchTreeTest {
                 + Integer.MAX_VALUE + " ", testTree.toString());
     }
 
-
+    
+    @Test
+    public void test5_delete() throws Exception {
+        testTree.insert(5);
+        testTree.remove(5);
+        Assert.assertEquals("Test 5 failed", "", testTree.toString());
+    }
+    
 }

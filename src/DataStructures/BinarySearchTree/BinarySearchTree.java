@@ -91,6 +91,8 @@ public class BinarySearchTree {
 				return toDelete.left;
 			} else if (toDelete.left == null && toDelete.right != null){
 				return toDelete.right;
+			} else if (toDelete.isLeaf()){
+				return null;
 			}
 			toDelete.value = toDelete.right.value;
 			toDelete.right = recDelete(toDelete.right);
@@ -205,7 +207,7 @@ public class BinarySearchTree {
      */
     boolean remove(int x) {
         if (root.find(root, x) != null){
-        	root.delete(root, x);
+        	root = root.delete(root, x);
             return true;
         }
         return false;
