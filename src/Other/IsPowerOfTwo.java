@@ -1,4 +1,4 @@
-package other;
+package Other;
 
 /**
  * Created by Dominick Martelly on 2/7/2017 at 12:12 PM.
