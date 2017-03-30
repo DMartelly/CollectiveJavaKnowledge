@@ -77,10 +77,8 @@ public class BinarySearchTree {
 		 * @return True if the Node was found and deleted
 		 */
 		private Node delete(Node root, int x) {
-			if (root == null) {
-				return root;
-			}
-			if (root.value == x){
+            assert root != null;
+            if (root.value == x){
 				root = recDelete(root);
 			} else if (x < root.value){
 				root.left = delete(root.left, x);
@@ -98,7 +96,8 @@ public class BinarySearchTree {
 			} else if (toDelete.isLeaf()){
 				return null;
 			}
-			toDelete.value = toDelete.right.value;
+            assert toDelete.right != null;
+            toDelete.value = toDelete.right.value;
 			toDelete.right = recDelete(toDelete.right);
 			return toDelete;
 		}
@@ -115,20 +114,20 @@ public class BinarySearchTree {
 		/**
 		 * @return The largest node of the current tree
 		 */
-		private Node getLargestChild() {
-			while (this.right != null)
-				return (this.right.getLargestChild());
-			return this;
-		}
+        private Node getLargestChild(Node root) {
+            if (root.right == null)
+                return root;
+            return (root.getLargestChild(root.right));
+        }
 
 		/**
 		 * @return The smallest node of the current tree
 		 */
-		private Node getSmallestChild() {
-			while (this.left != null)
-				return (this.left.getSmallestChild());
-			return this;
-		}
+        private Node getSmallestChild(Node root) {
+            if (root.left == null)
+                return root;
+            return (root.getSmallestChild(root.left));
+        }
 
 		@Override
 		public String toString() {
@@ -181,10 +180,8 @@ public class BinarySearchTree {
 	 * @return true if the value is found
 	 */
 	boolean search(int x) {
-		if (root == null)
-			return false;
-		return root.find(root, x) != null;
-	}
+        return root != null && root.find(root, x) != null;
+    }
 
 	/**
 	 * Removes a Node from a BST
@@ -212,8 +209,8 @@ public class BinarySearchTree {
 		if (root == null){
 			return (Integer.MIN_VALUE);
 		}
-		return root.getLargestChild().value;
-	}
+        return root.getLargestChild(root).value;
+    }
 
 	/**
 	 * Gets the left most element in the BST
@@ -224,8 +221,8 @@ public class BinarySearchTree {
 		if (root == null){
 			return (Integer.MIN_VALUE);
 		}
-		return root.getSmallestChild().value;
-	}
+        return root.getSmallestChild(root).value;
+    }
 
 	@Override
 	public String toString() {

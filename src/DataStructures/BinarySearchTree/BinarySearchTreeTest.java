@@ -103,7 +103,7 @@ public class BinarySearchTreeTest {
     
     @Test
     public void test_search2() throws Exception {
-        Assert.assertEquals("Test search2 failed", false, testTree.search(5));
+        Assert.assertEquals("Test search2 failed", false, testTree.search(3));
     }
     
     @Test
