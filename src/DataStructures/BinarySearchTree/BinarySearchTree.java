@@ -72,20 +72,27 @@ public class BinarySearchTree {
          * @param x    An integer value
          * @return True if the Node was found and deleted
          */
-        boolean delete(Node root, int x) {
-            Node toDelete = find(root, x);
-            if (toDelete == null) {
-                return false;
+        Node delete(Node root, int x) {
+            if (root == null) {
+                return root;
             }
-            toDelete = recDelete(toDelete);
-            return true;
+            if (root.value == x){
+            	root = recDelete(root);
+            } else if (x < root.value){
+            	root.left = delete(root.left, x);
+            } else {
+            	root.right = delete(root.right, x);
+            }
+            return root;
         }
 
         private Node recDelete(Node toDelete) {
-			if (toDelete.right == null){
+			if (toDelete.right == null && toDelete.left != null){
 				return toDelete.left;
+			} else if (toDelete.left == null && toDelete.right != null){
+				return toDelete.right;
 			}
-			toDelete.value = toDelete.right.getData();
+			toDelete.value = toDelete.right.value;
 			toDelete.right = recDelete(toDelete.right);
 			return toDelete;
 		}
@@ -197,10 +204,11 @@ public class BinarySearchTree {
      * @return true if removed
      */
     boolean remove(int x) {
-        if (root == null)
-            return false;
-        else
-            return root.delete(root, x);
+        if (root.find(root, x) != null){
+        	root.delete(root, x);
+            return true;
+        }
+        return false;
     }
 
     /**

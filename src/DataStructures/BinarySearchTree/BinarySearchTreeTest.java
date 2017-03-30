@@ -55,7 +55,7 @@ public class BinarySearchTreeTest {
         testTree.insert(4);
         testTree.insert(-99);
         testTree.remove(4);
-        Assert.assertEquals("Test 3 failed", Integer.MIN_VALUE + " -99 "
+        Assert.assertEquals("Test 4 failed", Integer.MIN_VALUE + " -99 "
                 + Integer.MAX_VALUE + " ", testTree.toString());
     }
 
