@@ -2,280 +2,236 @@ package DataStructures.BinarySearchTree;
 
 /**
  * A Binary Search Tree that can hold multiple Nodes
- * (Should the methods to change the BST be in the BinarySearchTree class,
- * or the Node class?)
  *
  * @author Dominick Martelly
  */
 public class BinarySearchTree {
 
-    /**
-     * The root Node of the Binary Search Tree
-     */
-    Node root;
+	/**
+	 * A Binary Search Tree's node. Holds a value, and two children nodes
+	 *
+	 * @author Dominick Martelly
+	 */
+	private class Node {
 
-    /**
-     * Creates an empty BST
-     */
-    public BinarySearchTree() {
-        root = null;
-    }
+		int value;
+		/**
+		 * The node's left child. Should have a number lower than value
+		 */
+		Node left;
+		/**
+		 * The node's right child. Should have a number greater than value
+		 */
+		Node right;
 
-    /**
-     * Inserts a new node containing x into the tree
-     *
-     * @param x - an integer value
-     */
-    public void insert(int x) {
-        Node newNode = new Node(x);
+		/**
+		 * Creates a Node holding an integer value
+		 *
+		 * @param x An integer value
+		 */
+		Node(int x) {
+			this.value = x;
+		}
 
-        if (root == null)
-            root = newNode;
-        else
-            root.add(x);
-    }
+		/**
+		 * Adds a new Node to a tree containing x as it's value
+		 *
+		 * @param root the current root node
+		 * @param x An integer value
+		 * @return the modified / original node
+		 */
+		private Node add(Node root, int x) {
+			if (root == null) {
+				return new Node(x);
+			}
+			if (x < root.value) {
+				root.left = add(root.left, x);
+			} else {
+				root.right = add(root.right, x);
+			}
+			return root;
+		}
 
-    /**
-     * Removes a Node from a BST
-     *
-     * @param x if the Node contains this element, the Node will be
-     *          removed
-     * @return true if removed
-     */
-    public boolean remove(int x) {
-        if (root == null)
-            return false;
-        else if (root.getData() == x) {
-            Node newRoot = new Node(Integer.MAX_VALUE);
-            newRoot.left = root;
-            boolean result = newRoot.delete(x, null);
-            root = newRoot.left;
-            return result;
-        } else
-            return root.delete(x, null);
-    }
+		/**
+		 * 
+		 * @param root The current root node
+		 * @param x An integer value
+		 * @return The node containing x
+		 */
+		private Node find(Node root, int x) {
+			if (root == null)
+				return null;
+			if (root.value == x)
+				return root;
+			if (x < root.value)
+				return find(root.left, x);
+			else
+				return find(root.right, x);
+		}
 
-    /**
-     * Gets the right most element in the BST
-     *
-     * @return the largest integer in the BST
-     */
-    public int getLargest() {
-        return root.getLargestChild().getData();
-    }
+		/**
+		 * Removes a Node from a tree
+		 *
+		 * @param root the tree to use
+		 * @param x    An integer value
+		 * @return True if the Node was found and deleted
+		 */
+		private Node delete(Node root, int x) {
+			if (root == null) {
+				return root;
+			}
+			if (root.value == x){
+				root = recDelete(root);
+			} else if (x < root.value){
+				root.left = delete(root.left, x);
+			} else {
+				root.right = delete(root.right, x);
+			}
+			return root;
+		}
 
-    /**
-     * Gets the left most element in the BST
-     *
-     * @return the smallest integer in the BST
-     */
-    public int getSmallest() {
-        return root.getSmallestChild().getData();
-    }
+		private Node recDelete(Node toDelete) {
+			if (toDelete.right == null && toDelete.left != null){
+				return toDelete.left;
+			} else if (toDelete.left == null && toDelete.right != null){
+				return toDelete.right;
+			} else if (toDelete.isLeaf()){
+				return null;
+			}
+			toDelete.value = toDelete.right.value;
+			toDelete.right = recDelete(toDelete.right);
+			return toDelete;
+		}
 
-    /**
-     * Searches if there is a node containing x within the BST
-     *
-     * @param x an integer value
-     * @return true if the value is found
-     */
-    boolean binarySearch(int x) {
-        if (root == null)
-            return false;
-        else
-            return root.search(x);
-    }
+		/**
+		 * Checks if the Node has any child Nodes
+		 *
+		 * @return True if Node is a leaf
+		 */
+		private boolean isLeaf() {
+			return (this.left == null && this.right == null);
+		}
 
-    @Override
-    public String toString() {
-        return root.toString();
-    }
+		/**
+		 * @return The largest node of the current tree
+		 */
+		private Node getLargestChild() {
+			while (this.right != null)
+				return (this.right.getLargestChild());
+			return this;
+		}
 
-    /**
-     * A Binary Search Tree's node. Holds a value, and two children nodes
-     *
-     * @author Dominick Martelly
-     */
+		/**
+		 * @return The smallest node of the current tree
+		 */
+		private Node getSmallestChild() {
+			while (this.left != null)
+				return (this.left.getSmallestChild());
+			return this;
+		}
 
-    private class Node {
+		@Override
+		public String toString() {
+			// If there is only one element
+			if (this.isLeaf())
+				return Integer.toString(this.value) + " ";
 
-        int value;
+			String listofNodes = "";
 
-        /**
-         * The node's left child. Should have a lower value than the node
-         */
-        Node left;
+			if (this.left != null)
+				listofNodes += this.left.toString();
 
-        /**
-         * The node's right child. Should have a greater value than the node
-         */
-        Node right;
+			listofNodes += this.value + " ";
 
-        /**
-         * Creates a Node holding an integer value
-         *
-         * @param x An integer value
-         */
-        Node(int x) {
-            this.value = x;
-        }
+			if (this.right != null)
+				listofNodes += this.right.toString();
 
-        /**
-         * Adds a new Node to a tree containing x as it's value
-         *
-         * @param x An integer value
-         */
-        void add(int x) {
-            if (x <= this.value)
-                if (this.left == null) {
-                    Node newNode = new Node(x);
-                    this.left = newNode;
-                } else
-                    this.left.add(x);
-            else if (x > this.value)
-                if (this.right == null) {
-                    Node newNode = new Node(x);
-                    this.right = newNode;
-                } else
-                    this.right.add(x);
-        }
+			return listofNodes;
+		}
+	}
 
-        /**
-         * @param x An integer value
-         * @return The node containing x
-         */
-        private Node find(int x) {
-            if (x == this.value)
-                return this;
-            if (this.isLeaf())
-                return null;
+	/**
+	 * The root Node of the Binary Search Tree
+	 */
+	private Node root;
 
-            if (x < this.value && this.left != null)
-                return this.left.find(x);
-            else if (x > this.value && this.right != null)
-                return this.right.find(x);
-            else
-                return null;
-        }
+	/**
+	 * Creates an empty BST
+	 */
+	BinarySearchTree() {
+		root = null;
+	}
 
-        /**
-         * Removes a Node from a tree
-         *
-         * @param x          An integer value
-         * @param parentNode The parent node
-         * @return True if the Node was found and deleted
-         */
-        boolean delete(int x, Node parentNode) {
-            if (this.value == x) {
-                if (this.isFull()) {
-                    this.value = this.right.getSmallestChild().value;
-                    this.right.delete(this.value, this);
-                } else if (this == parentNode.left) {
-                    if (this.left == null)
-                        parentNode.left = this.left;
-                    else
-                        parentNode.right = this.right;
-                } else if (this == parentNode.right) {
-                    if (this.right == null)
-                        parentNode.right = this.left;
-                    else
-                        parentNode.right = this.right;
-                }
-            } else if (x < this.getData()) {
-                if (this.left == null)
-                    return false;
-                else
-                    return this.left.delete(x, this);
-            } else if (x > this.getData()) {
-                if (this.right == null)
-                    return false;
-                else
-                    return this.right.delete(x, this);
-            }
-            return true;
-        }
+	/**
+	 * Inserts a new node containing x into the tree
+	 *
+	 * @param x - an integer value
+	 */
+	void insert(int x) {
+		if (root == null)
+			root = new Node(x);
+		else
+			root.add(root, x);
+	}
 
-        /**
-         * Searches though the tree of the Node for a Node containing the
-         * current value
-         *
-         * @param x An integer value
-         * @return True if a Node containing x was found
-         */
-        boolean search(int x) {
-            if (x == this.value)
-                return true;
-            if (this.isLeaf())
-                return false;
+	/**
+	 * Searches if there is a node containing x within the BST
+	 *
+	 * @param x an integer value
+	 * @return true if the value is found
+	 */
+	boolean search(int x) {
+		if (root == null)
+			return false;
+		return root.find(root, x) != null;
+	}
 
-            if (x < this.value && this.left != null)
-                return this.left.search(x);
-            else if (x > this.value && this.right != null)
-                return this.right.search(x);
-            else
-                return false;
-        }
+	/**
+	 * Removes a Node from a BST
+	 *
+	 * @param x if the Node contains this element, the Node will be
+	 *          removed
+	 * @return true if removed
+	 */
+	boolean remove(int x) {
+		if (root == null)
+			return false;
+		if (root.find(root, x) != null){
+			root = root.delete(root, x);
+			return true;
+		}
+		return false;
+	}
 
-        /**
-         * Checks if the Node has any child Nodes
-         *
-         * @return True if Node is a leaf
-         */
-        boolean isLeaf() {
-            return (this.left == null && this.right == null);
-        }
+	/**
+	 * Gets the right most element in the BST
+	 *
+	 * @return the largest integer in the BST
+	 */
+	int getLargest() {
+		if (root == null){
+			return (Integer.MIN_VALUE);
+		}
+		return root.getLargestChild().value;
+	}
 
-        /**
-         * Checks if the Node has two children Nodes
-         *
-         * @return True if Node is full
-         */
-        boolean isFull() {
-            return (this.left != null && this.right != null);
-        }
+	/**
+	 * Gets the left most element in the BST
+	 *
+	 * @return the smallest integer in the BST
+	 */
+	int getSmallest() {
+		if (root == null){
+			return (Integer.MIN_VALUE);
+		}
+		return root.getSmallestChild().value;
+	}
 
-        /**
-         * @return The int in the node
-         */
-        int getData() {
-            return this.value;
-        }
-
-        /**
-         * @return The largest node of the current tree
-         */
-        Node getLargestChild() {
-            while (this.right != null)
-                return (this.right.getLargestChild());
-            return this;
-        }
-
-        /**
-         * @return The smallest node of the current tree
-         */
-        Node getSmallestChild() {
-            while (this.left != null)
-                return (this.left.getSmallestChild());
-            return this;
-        }
-
-        @Override
-        public String toString() {
-            // If there is only one element
-            if (this.isLeaf())
-                return Integer.toString(this.value) + " ";
-
-            String listofNodes = "";
-
-            if (this.left != null)
-                listofNodes += this.left.toString();
-
-            listofNodes += this.value + " ";
-
-            if (this.right != null)
-                listofNodes += this.right.toString();
-
-            return listofNodes;
-        }
-    }
+	@Override
+	public String toString() {
+		if (root == null) {
+			return "";
+		}
+		return root.toString();
+	}
 }
