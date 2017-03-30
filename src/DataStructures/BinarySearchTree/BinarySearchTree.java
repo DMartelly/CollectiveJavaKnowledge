@@ -173,7 +173,7 @@ public class BinarySearchTree {
 		else
 			root.add(root, x);
 	}
-	
+
 	/**
 	 * Searches if there is a node containing x within the BST
 	 *
@@ -209,6 +209,9 @@ public class BinarySearchTree {
 	 * @return the largest integer in the BST
 	 */
 	int getLargest() {
+		if (root == null){
+			return (Integer.MIN_VALUE);
+		}
 		return root.getLargestChild().value;
 	}
 
@@ -218,6 +221,9 @@ public class BinarySearchTree {
 	 * @return the smallest integer in the BST
 	 */
 	int getSmallest() {
+		if (root == null){
+			return (Integer.MIN_VALUE);
+		}
 		return root.getSmallestChild().value;
 	}
 
