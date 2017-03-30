@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Fibonacci;
 
 import java.text.DecimalFormat;
@@ -9,22 +6,26 @@ import java.util.Scanner;
 
 /**
  * @author Dominick
- *
  */
 public class FibonacciDriver {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		long startTime, endTime;
+    /**
+     * @param args takes one parameter as an integer
+     */
+    public static void main(String[] args) {
+        long startTime, endTime;
         long fib1, fib2, fib3;
         long fib1Time, fib2Time, fib3Time;
-
-        System.out.println("Input a number");
-        Scanner in = new Scanner(System.in);
-        int x = in.nextInt();
-        in.close();
+        int x;
+        if (args.length == 1) {
+            x = Integer.parseInt(args[0]);
+            System.out.println("Number = " + x);
+        } else {
+            System.out.println("Input a number");
+            Scanner in = new Scanner(System.in);
+            x = in.nextInt();
+            in.close();
+        }
 
         startTime = System.nanoTime();
         fib1 = Fibonacci.fib1(x);
@@ -51,6 +52,6 @@ public class FibonacciDriver {
 
         System.out.println("Fibonacci of fib3: " + fib3
                 + "\nRunning Time: " + f.format(fib3Time / 1000000d) + " Milliseconds\n");
-	}
+    }
 
 }
