@@ -67,4 +67,28 @@ public class BinarySearchTreeTest {
         Assert.assertEquals("Test 5 failed", "", testTree.toString());
     }
     
+    @Test
+    public void test6_delete() throws Exception {
+        Assert.assertEquals("Test 6 failed", false, testTree.remove(5));
+    }
+    
+    @Test
+    public void test7_delete() throws Exception {
+    	testTree.insert(8);
+    	testTree.insert(12);
+    	testTree.insert(Integer.MIN_VALUE);
+        Assert.assertEquals("Test 7 failed", false, testTree.remove(5));
+    }
+    
+    @Test
+    public void test8_search() throws Exception {
+        testTree.insert(5);
+        Assert.assertEquals("Test 8 failed", true, testTree.search(5));
+    }
+    
+    @Test
+    public void test9_search() throws Exception {
+        Assert.assertEquals("Test 9 failed", false, testTree.search(5));
+    }
+    
 }
