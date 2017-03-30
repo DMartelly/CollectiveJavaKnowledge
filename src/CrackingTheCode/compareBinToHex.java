@@ -1,9 +1,5 @@
 package CrackingTheCode;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
 /**
  * Suppose you were asked to write a function to check if the value of a binary number (passed as a string)
  * equals the hexadecimal representation of a string. (pg 90)
