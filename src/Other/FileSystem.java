@@ -8,7 +8,7 @@ import java.util.Stack;
  *
  * Finds all the images in the file system
  *
- * Ex.
+ * Example
  * root
  *  f1
  *   txt1.txt
@@ -55,6 +55,7 @@ public class FileSystem {
                 System.out.println();
             }
         }
+        in.close();
     }
 
     public static int countBeginningSpaces(String s) {
