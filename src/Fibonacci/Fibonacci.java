@@ -6,10 +6,10 @@ package Fibonacci;
 class Fibonacci {
 
 	/**
-	 * Returns the fib number using dynamic programming
+	 * Returns the fibonacci number using dynamic programming in O(n) time
 	 *
-	 * @param x the fib number
-	 * @return the fib number at location x
+	 * @param x the fibonacci number
+	 * @return the fibonacci number at location x
 	 */
 	static long fib1(int x) {
 		if (x < 0)
@@ -30,10 +30,10 @@ class Fibonacci {
 	}
 
 	/**
-	 * Returns the fib number in O(n^2)
+	 * Returns the fibonacci number in O(n^2)
 	 *
-	 * @param x the fib number
-	 * @return the fib number at position x
+	 * @param x the fibonacci number
+	 * @return the fibonacci number at position x
 	 */
 	static long fib2(int x) {
 		if (x < 0)
@@ -57,7 +57,7 @@ class Fibonacci {
 
 		// Must use 2D array (Pascal's Triangle)
 		// **Please note: I did use some help from the Internet to explain how
-		// to solve the fib sequence with a O(log(n)) approach**
+		// to solve the Fibonacci sequence with a O(log(n)) approach**
 		long[][] r =
 			{
 				{
