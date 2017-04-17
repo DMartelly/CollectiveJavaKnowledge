@@ -107,8 +107,8 @@ class Sudoku {
 
     private int[][] getQuadrant(int quadrantNumber) {
         int[][] result = new int[3][3];
-        int startRow = (quadrantNumber % 3) * 3;
-        int startColumn = quadrantNumber % 3;
+        int startRow = (quadrantNumber / 3) * 3;
+        int startColumn = (quadrantNumber % 3) * 3;
         int i1 = 0, j1 = 0;
         for (int i = startRow; i < startRow + 3; i++) {
             for (int j = startColumn; j < startColumn + 3; j++) {
