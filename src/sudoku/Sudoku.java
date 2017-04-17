@@ -81,7 +81,7 @@ class Sudoku {
     }
 
     /**
-     * Checks to see if all subSquares are Latin
+     * Checks to see if all subSquares for the sudoku puzzle are Latin
      *
      * @return if all subSquares are Latin, returns boolean true
      */
