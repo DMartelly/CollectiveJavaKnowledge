@@ -120,13 +120,13 @@ public class Queue {
             return "The Queue is Empty";
         else {
             Node current = first;
-            String result = "Queue: ";
+            StringBuilder result = new StringBuilder("Queue: ");
 
             while (current != null) {
-                result += current.toString() + " ";
+                result.append(current.toString()).append(" ");
                 current = current.getNext();
             }
-            return result;
+            return result.toString();
         }
     }
 }
