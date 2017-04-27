@@ -5,7 +5,7 @@ package sudoku;
  */
 class Sudoku {
 
-    private int[][] sudokuBoard = new int[9][9];
+    private SudokuDigit[][] sudokuBoard = new SudokuDigit[9][9];
 
     /**
      * Parses an 81 character string into a 2D string array (sudoku board)
@@ -19,7 +19,7 @@ class Sudoku {
         int k = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                sudokuBoard[i][j] = Integer.parseInt(listOfNumbers.substring(k, k + 1));
+                sudokuBoard[i][j] = SudokuDigit.getDigit(listOfNumbers.charAt(k));
                 k++;
             }
         }
@@ -41,7 +41,7 @@ class Sudoku {
                 if ((j == 3) || (j == 6)) {
                     result.append(" || ");
                 }
-                result.append(sudokuBoard[i][j]);
+                result.append(SudokuDigit.getValue(sudokuBoard[i][j]));
             }
             result.append("\n");
         }
@@ -55,7 +55,7 @@ class Sudoku {
      * @return True iff the Sudoku board meets rules/specifications
      */
     boolean isValid() {
-        return rowsAndColumnsAreLatin() && goodSubSquares();
+        return areRowsAndColumnsLatin() && areSubSquaresLatin();
     }
 
     /**
@@ -63,13 +63,13 @@ class Sudoku {
      *
      * @return If all columns are Latin, returns a boolean true
      */
-    private boolean rowsAndColumnsAreLatin() {
+    private boolean areRowsAndColumnsLatin() {
         int sumOfRows = 0;
         int sumOfColumns = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                sumOfRows += sudokuBoard[i][j];
-                sumOfColumns += sudokuBoard[j][i];
+                sumOfRows += SudokuDigit.getValue(sudokuBoard[i][j]);
+                sumOfColumns += SudokuDigit.getValue(sudokuBoard[j][i]);
             }
             if (sumOfRows != 45 || sumOfColumns != 45) {
                 return false;
@@ -85,7 +85,7 @@ class Sudoku {
      *
      * @return if all subSquares are Latin, returns boolean true
      */
-    private boolean goodSubSquares() {
+    private boolean areSubSquaresLatin() {
         for (int i = 0; i < 9; i++) {
             if (!isValidSubSquare(getQuadrant(i))) {//when i == 1
                 return false;
@@ -112,7 +112,7 @@ class Sudoku {
         int i1 = 0, j1 = 0;
         for (int i = startRow; i < startRow + 3; i++) {
             for (int j = startColumn; j < startColumn + 3; j++) {
-                result[i1][j1] = sudokuBoard[i][j];
+                result[i1][j1] = SudokuDigit.getValue(sudokuBoard[i][j]);
                 j1++;
             }
             i1++;
