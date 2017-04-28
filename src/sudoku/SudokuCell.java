@@ -7,12 +7,18 @@ import java.util.Arrays;
  * <p>
  * A class representing a cell on a sudoku grid
  */
-public class SudokuCell {
+class SudokuCell {
     private SudokuDigit digit;
     private boolean[] possibleValues;
 
     SudokuCell() {
         digit = SudokuDigit.BLANK;
+        possibleValues = new boolean[10];
+        Arrays.fill(possibleValues, false);
+    }
+
+    SudokuCell(char c) {
+        digit = SudokuDigit.getDigit(c);
         possibleValues = new boolean[10];
         Arrays.fill(possibleValues, false);
     }
@@ -29,5 +35,9 @@ public class SudokuCell {
             }
         }
         return values.toString();
+    }
+
+    SudokuDigit getDigit() {
+        return digit;
     }
 }
