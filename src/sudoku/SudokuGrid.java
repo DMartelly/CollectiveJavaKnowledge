@@ -7,6 +7,18 @@ class SudokuGrid {
 
     private SudokuCell[][] sudokuBoard = new SudokuCell[9][9];
 
+
+    /**
+     * Creates an empty sudoku board
+     */
+    SudokuGrid() {
+        for (int i = 0; i < sudokuBoard.length; i++) {
+            for (int j = 0; j < sudokuBoard[0].length; j++) {
+                sudokuBoard[i][j] = new SudokuCell();
+            }
+        }
+    }
+
     /**
      * Parses an 81 character string into a 2D string array (sudoku board)
      *
