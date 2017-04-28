@@ -3,7 +3,7 @@ package sudoku;
 /**
  * @author Dominick Martelly
  */
-class Sudoku {
+class SudokuGrid {
 
     private SudokuDigit[][] sudokuBoard = new SudokuDigit[9][9];
 
@@ -12,7 +12,7 @@ class Sudoku {
      *
      * @param listOfNumbers the numbers of the sudoku board in from left to right
      */
-    Sudoku(String listOfNumbers) {
+    SudokuGrid(String listOfNumbers) {
         if (listOfNumbers.length() != 81) {
             throw new IllegalArgumentException("The string length is not 81 chars");
         }

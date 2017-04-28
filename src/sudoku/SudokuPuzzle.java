@@ -19,10 +19,10 @@ public class SudokuPuzzle {
     }
 
     private static void checkSudoku(String sudokuString) {
-        Sudoku mySudoku = new Sudoku(sudokuString);
+        SudokuGrid mySudokuGrid = new SudokuGrid(sudokuString);
 
-        System.out.println("This puzzle is " + (mySudoku.isValid() ? "valid" : "invalid"));
-        System.out.println(mySudoku);
+        System.out.println("This puzzle is " + (mySudokuGrid.isValid() ? "valid" : "invalid"));
+        System.out.println(mySudokuGrid);
         System.out.println("--------------------------------------------------\n");
     }
 }
