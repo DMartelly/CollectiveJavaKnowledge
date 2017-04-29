@@ -53,7 +53,7 @@ class SudokuGrid {
                 if ((j == 3) || (j == 6)) {
                     result.append(" || ");
                 }
-                result.append(sudokuBoard[i][j].getDigit());
+                result.append(sudokuBoard[i][j]);
             }
             result.append("\n");
         }
@@ -80,8 +80,8 @@ class SudokuGrid {
         int sumOfColumns = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                sumOfRows += SudokuDigit.getValue(sudokuBoard[i][j].getDigit());
-                sumOfColumns += SudokuDigit.getValue(sudokuBoard[j][i].getDigit());
+                sumOfRows += sudokuBoard[i][j].getDigit().getValue();
+                sumOfColumns += sudokuBoard[j][i].getDigit().getValue();
             }
             if (sumOfRows != 45 || sumOfColumns != 45) {
                 return false;
@@ -124,7 +124,7 @@ class SudokuGrid {
         int i1 = 0, j1 = 0;
         for (int i = startRow; i < startRow + 3; i++) {
             for (int j = startColumn; j < startColumn + 3; j++) {
-                result[i1][j1] = SudokuDigit.getValue(sudokuBoard[i][j].getDigit());
+                result[i1][j1] = sudokuBoard[i][j].getDigit().getValue();
                 j1++;
             }
             i1++;
