@@ -1,8 +1,7 @@
 package crackingTheCode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Dominick Martelly on 2/7/2017 at 8:46 PM.
@@ -21,47 +20,26 @@ public class Question4_1 {
         myGraph.addEdge('h', 'f');
         myGraph.addEdge('j', 'c');
         System.out.println(myGraph.toString());
-
-        System.out.println(routeBetweenNodes(myGraph, 'a', 'e'));
-
-    }
-
-    private static boolean routeBetweenNodes(Graph graph, char start, char end) {
-        LinkedList<ArrayList> q = new LinkedList<>();
-        boolean[] markedList = new boolean[graph.numOfNodes()];
-        Arrays.fill(markedList, false);
-        markedList[start - 'a'] = false;
-        q.add(graph.nodes[start - 'a']);
-
-        return false;
     }
 
     private static class Graph {
-        ArrayList<Character>[] nodes;
+        List<List<Character>> nodes;
+
         Graph(int size){
-            nodes = (ArrayList<Character>[]) new ArrayList[size];
-            for (int i = 0; i < nodes.length; i ++){
-                nodes[i] = new ArrayList<Character>();
+            for (int i = 0; i < size; i++) {
+                nodes.add(new ArrayList<>());
             }
         }
 
         void addEdge(char index, Character c) {
-            nodes[index - 'a'].add(c);
-        }
-
-        Character remove(int index, char c) {
-            return nodes[index].remove(c);
-        }
-
-        int numOfNodes(){
-            return nodes.length;
+            nodes.get(index - 'a').add(c);
         }
 
         @Override
         public String toString() {
             StringBuilder s = new StringBuilder();
-            for (int i = 0; i < nodes.length; i++) {
-                s.append((char)('a' + i)).append(": ").append(nodes[i].toString()).append("\n");
+            for (int i = 0; i < nodes.size(); i++) {
+                s.append((char) ('a' + i)).append(": ").append(nodes.get(i).toString()).append("\n");
             }
             return s.toString();
         }

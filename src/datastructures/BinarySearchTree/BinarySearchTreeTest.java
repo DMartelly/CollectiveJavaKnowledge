@@ -1,4 +1,4 @@
-package datastructures.BinarySearchTree;
+package datastructures.binarySearchTree;
 
 import org.junit.After;
 import org.junit.Assert;

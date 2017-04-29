@@ -21,8 +21,7 @@ public class ParallelMultiplyMatrix implements Runnable {
 
         this.matrix2 = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; i++)
-            for (int j = 0; j < matrix[i].length; j++)
-                matrix2[i][j] = matrix[i][j];
+            System.arraycopy(matrix[i], 0, matrix2[i], 0, matrix[i].length);
 
         resultMatrix = new int[matrix.length][matrix.length];
     }
@@ -36,7 +35,7 @@ public class ParallelMultiplyMatrix implements Runnable {
                 resultMatrix[i / matrix.length][i % matrix.length] += resultMatrix[i / matrix.length][j] * matrix[j][i % matrix.length];
             i += Runtime.getRuntime().availableProcessors();
         }
-        for (int k = 0; k < matrix2.length; k++)
+        for (int[] aMatrix2 : matrix2)
             System.arraycopy(resultMatrix[i], 0, matrix2[i], 0, matrix2[i].length);
     }
 

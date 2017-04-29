@@ -1,5 +1,6 @@
 package patterns.commandPatteren;
 
+@SuppressWarnings("UnnecessaryLocalVariable")
 public class CommandTest {
     public static void main(String[] args) {
         Fan myFan = new Fan();
@@ -14,6 +15,8 @@ public class CommandTest {
         System.out.println(myFan);
         off.execute();
         System.out.println(myFan);
+        on.execute();
+        off.execute();
     }
 
     public interface Command {
@@ -23,15 +26,15 @@ public class CommandTest {
     public static class Fan {
         private boolean spinning;
 
-        public Fan() {
+        Fan() {
             spinning = false;
         }
 
-        public void TurnOn() {
+        void TurnOn() {
             spinning = true;
         }
 
-        public void TurnOff() {
+        void TurnOff() {
             spinning = false;
         }
 
@@ -48,7 +51,7 @@ public class CommandTest {
 
         private Fan fan;
 
-        public TurnFanOn(Fan f) {
+        TurnFanOn(Fan f) {
             fan = f;
         }
 
@@ -63,7 +66,7 @@ public class CommandTest {
 
         private Fan fan;
 
-        public TurnFanOff(Fan f) {
+        TurnFanOff(Fan f) {
             fan = f;
         }
 

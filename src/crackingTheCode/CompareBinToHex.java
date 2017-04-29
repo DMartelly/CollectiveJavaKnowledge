@@ -6,7 +6,7 @@ package crackingTheCode;
  *
  * @author Dominick Martelly
  */
-public class compareBinToHex {
+public class CompareBinToHex {
     public static void main(String arg[]) {
         System.out.println(compareBinToHex("1110", "e"));
         System.out.println(compareBinToHex("101", "5"));

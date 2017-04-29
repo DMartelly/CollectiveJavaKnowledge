@@ -1,4 +1,4 @@
-package datastructures.Hashtable;
+package datastructures.hashtable;
 
 import java.util.Arrays;
 import java.util.Random;

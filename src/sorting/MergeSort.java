@@ -17,7 +17,6 @@ public class MergeSort {
 
     private int[] array;
     private int[] tempMergeArr;
-    private int length;
 
     public static void main(String[] argc) {
         int[] A = {3, 2, 1, 4};
@@ -34,9 +33,8 @@ public class MergeSort {
      */
     public void mergeSort(int inputArr[]) {
         this.array = inputArr;
-        this.length = inputArr.length;
-        this.tempMergeArr = new int[length];
-        doMergeSort(0, length - 1);
+        this.tempMergeArr = new int[inputArr.length];
+        doMergeSort(0, inputArr.length - 1);
     }
 
     /**
@@ -57,9 +55,7 @@ public class MergeSort {
 
     private void mergeParts(int lowerIndex, int middle, int higherIndex) {
 
-        for (int i = lowerIndex; i <= higherIndex; i++) {
-            tempMergeArr[i] = array[i];
-        }
+        System.arraycopy(array, lowerIndex, tempMergeArr, lowerIndex, higherIndex + 1 - lowerIndex);
         int i = lowerIndex;
         int j = middle + 1;
         int k = lowerIndex;

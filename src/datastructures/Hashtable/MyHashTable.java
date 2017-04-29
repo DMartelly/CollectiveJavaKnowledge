@@ -1,4 +1,4 @@
-package datastructures.Hashtable;
+package datastructures.hashtable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Dominick Martelly
  */
-public class MyHashTable {
+class MyHashTable {
     static Integer[] removeDuplicates(int[] input, int maxVal) {
         List<Integer> new_a = new ArrayList<>();
         int[] myTable = new int[maxVal];

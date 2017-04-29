@@ -15,7 +15,7 @@ public class Question5_3 {
         if (num < 0) {
             return -1;
         }
-        int max = 0;
+        int max;
         int curr = 0, next = 0;
 
         while (num % 2 == 1) {

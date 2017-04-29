@@ -83,13 +83,12 @@ public class Vehicle {
     }
 
 
-    boolean removeOneTire() {
+    void removeOneTire() {
         if (tires.size() <= 0) {
-            System.out.println("No Tires to Remove, This Vehicle has " + this.tires.size() + " Tires");
-            return false;
+            System.out.println("No Tires to Remove. This Vehicle has " + this.tires.size() + " Tires");
+            return;
         }
         tires.remove(0);
-        return true;
     }
 
     @Override
@@ -98,5 +97,9 @@ public class Vehicle {
                 "Color: " + getColor() + "\n" +
                 "Number of Tires: " + tires.size() + "\n" +
                 "Weight : " + getWeight() + " lb" + "\n";
+    }
+
+    public int getHeadlights() {
+        return headlights;
     }
 }

@@ -1,4 +1,4 @@
-package datastructures.QueuesAndLists;
+package datastructures.queuesAndLists;
 
 /**
  * @author Dominick Martelly

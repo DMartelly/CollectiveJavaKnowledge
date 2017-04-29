@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Dominick Martelly
  */
-public class main {
+public class Driver {
     public static void main(String[] arg) throws InterruptedException {
         final int PATHS = 2, SIZE = 10;
 
