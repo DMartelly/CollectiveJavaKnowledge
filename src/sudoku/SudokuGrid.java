@@ -37,29 +37,43 @@ class SudokuGrid {
         }
     }
 
-    /**
-     * Prints a full sudoku board
-     *
-     * @return Prints the Sudoku board as a string in full layout
-     */
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
+    public void fillAllPossibleCells() {
         for (int i = 0; i < 9; i++) {
-            if ((i == 3) || (i == 6)) {
-                result.append("=================\n");
-            }
             for (int j = 0; j < 9; j++) {
-                if ((j == 3) || (j == 6)) {
-                    result.append(" || ");
-                }
-                result.append(sudokuBoard[i][j]);
+                fillPossibleCell(sudokuBoard[i][j], i, j);
             }
-            result.append("\n");
         }
-        return result.toString();
     }
 
+    /**
+     * Looks at the cell's row, column, and section to find all possible values
+     * that the cell can have and sets the possible values
+     *
+     * @param sudokuCell the location of the cell
+     * @param row        the row number
+     * @param column     the column number
+     */
+    private void fillPossibleCell(SudokuCell sudokuCell, int row, int column) {
+        sudokuCell.setAllPossibleValues();
+
+        //Check the column
+        for (int i = 0; i < 9; i++) {
+            if (i != row) {
+                SudokuDigit s = sudokuBoard[i][column].getDigit();
+                sudokuCell.removePossibleValue(s.getValue());
+            }
+        }
+
+        //Check the row
+        for (int i = 0; i < 9; i++) {
+            if (i != column) {
+                SudokuDigit s = sudokuBoard[row][i].getDigit();
+                sudokuCell.removePossibleValue(s.getValue());
+            }
+        }
+
+        //Todo: Check the SubSquares
+    }
 
     /**
      * Checks if the Sudoku puzzle is valid for trial
@@ -131,6 +145,33 @@ class SudokuGrid {
             j1 = 0;
         }
         return result;
+    }
+
+    public String printPossibleValues() {
+        return "";
+    }
+
+    /**
+     * Prints a full sudoku board
+     *
+     * @return Prints the Sudoku board as a string in full layout
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < 9; i++) {
+            if ((i == 3) || (i == 6)) {
+                result.append("=================\n");
+            }
+            for (int j = 0; j < 9; j++) {
+                if ((j == 3) || (j == 6)) {
+                    result.append(" || ");
+                }
+                result.append(sudokuBoard[i][j]);
+            }
+            result.append("\n");
+        }
+        return result.toString();
     }
 
 }

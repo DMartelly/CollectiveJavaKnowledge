@@ -16,13 +16,20 @@ class SudokuCell {
     SudokuCell() {
         digit = SudokuDigit.BLANK;
         possibleValues = new boolean[10];
-        Arrays.fill(possibleValues, true);
     }
 
     SudokuCell(char c) {
         digit = charToDigit(c);
         possibleValues = new boolean[10];
         Arrays.fill(possibleValues, digit != SudokuDigit.BLANK);
+    }
+
+    void setAllPossibleValues() {
+        Arrays.fill(possibleValues, true);
+    }
+
+    void removePossibleValue(int num) {
+        possibleValues[num] = false;
     }
 
     private SudokuDigit charToDigit(char c) {
@@ -71,5 +78,18 @@ class SudokuCell {
     @Override
     public String toString() {
         return digit.toString();
+    }
+
+    public String printPossibaleVaules() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < possibleValues.length; i++) {
+            if (possibleValues[i]) {
+                result.append(i + 1).append(", ");
+            }
+        }
+        if (result.length() > 1) {
+            return result.substring(0, result.length() - 2);
+        }
+        return result.toString();
     }
 }
