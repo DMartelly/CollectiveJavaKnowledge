@@ -80,7 +80,10 @@ class SudokuCell {
         return digit.toString();
     }
 
-    public String printPossibaleVaules() {
+    /**
+     * @return A string of possible values for the cell
+     */
+    public String printPossibleValues() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < possibleValues.length; i++) {
             if (possibleValues[i]) {
